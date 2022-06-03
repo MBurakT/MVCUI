@@ -11,10 +11,11 @@
 </p>
 <form asp-controller="Item" asp-action="Index" method="get">
     <p>
-        Title: <input type="text"  name="filter"/>
+        Title: <input type="text" name="filter" />
         <input type="submit" value="Search" />
     </p>
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -46,38 +47,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UNITPRICE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UNITPRICE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

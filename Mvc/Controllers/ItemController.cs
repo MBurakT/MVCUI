@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mvc.Data;
+using Mvc.Models;
 
 namespace Mvc.Controllers
 {
@@ -13,23 +14,17 @@ namespace Mvc.Controllers
         }
 
         // GET: ItemController
-        public ActionResult Index(string? filter)
+        public IActionResult Index(string? filter)
         {
-            if(filter == null)
+            if (filter == null)
             {
-                return View(_context.Items.ToList().Take(30));
+                return View(_context.Items.ToList().Take(50));
             }
-            return View(_context.Items.ToList().Take(5).Where(p=>p.ItemName.Contains(filter)));
-        }
-
-        // GET: ItemController/Details/5
-        public async Task<IActionResult> Details(int id)
-        {
-            return View(await _context.Items.FindAsync(id));
+            return View(_context.Items.ToList().Take(10).Where(p => p.ItemName.Contains(filter)));
         }
 
         // GET: ItemController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -37,7 +32,7 @@ namespace Mvc.Controllers
         // POST: ItemController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(IFormCollection collection)
         {
             try
             {
@@ -50,15 +45,15 @@ namespace Mvc.Controllers
         }
 
         // GET: ItemController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            return View(await _context.Items.FindAsync(id));
         }
 
         // POST: ItemController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, Item item)
         {
             try
             {
@@ -70,8 +65,15 @@ namespace Mvc.Controllers
             }
         }
 
+        // GET: ItemController/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            return View(await _context.Items.FindAsync(id));
+        }
+
+
         // GET: ItemController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View();
         }
@@ -79,7 +81,7 @@ namespace Mvc.Controllers
         // POST: ItemController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, Item item)
         {
             try
             {
