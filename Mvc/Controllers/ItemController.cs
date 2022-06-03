@@ -53,15 +53,17 @@ namespace Mvc.Controllers
         // POST: ItemController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Item item)
+        public IActionResult Edit(int id, [Bind("Id", "ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
         {
             try
             {
+                _context.Items.Update(item);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception exception)
             {
-                return View();
+                throw new Exception(exception.Message);
             }
         }
 
@@ -73,10 +75,10 @@ namespace Mvc.Controllers
 
 
         // GET: ItemController/Delete/5
-        public IActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public IActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: ItemController/Delete/5
         [HttpPost]
@@ -85,11 +87,13 @@ namespace Mvc.Controllers
         {
             try
             {
+                _context.Items.Remove(item);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception exception)
             {
-                return View();
+                throw new Exception(exception.Message);
             }
         }
     }

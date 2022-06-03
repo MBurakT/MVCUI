@@ -4,17 +4,90 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="col-md-offset-4 col-md-2 col-md-pull-4">Edit</h1>
 
 <form asp-action="Edit" asp-route-id=@Model.Id method="post">
     <div class="form-horizontal">
+
+        <div class="form-group" hidden>
+            <label asp-for="Id" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Id" class="form-control" value=@Model.Id />
+            </div>
+        </div>
         <div class="form-group">
-            <div class="col-md-offset-10 col-md-2">
+            <label asp-for="ItemCode" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="ItemCode" class="form-control" />
+                <span asp-validation-for="ItemCode" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ItemName" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UNITPRICE" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="UNITPRICE" class="form-control" />
+                <span asp-validation-for="UNITPRICE" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category1" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Category1" class="form-control" />
+                <span asp-validation-for="Category1" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category2" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Category2" class="form-control" />
+                <span asp-validation-for="Category2" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category3" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Category3" class="form-control" />
+                <span asp-validation-for="Category3" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category4" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Category4" class="form-control" />
+                <span asp-validation-for="Category4" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Brand" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger" />
+            </div>
+        </div>
+        @*
+            <div class="form-group">
+            <label asp-for="" class="col-md-2 form-control"></label>
+            <div class="col-md-10">
+            <input asp-for="" class="form-control"/>
+            <span asp-validation-for="" class="text-danger" />
+            </div>
+            </div>
+        *@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
-
-<a asp-action="Index">Back To List</a>
-@*<a asp-action="Edit" asp-route-id=@Model.Id >Save</a>*@
+<div class="col-md-10">
+    <a asp-action="Details" asp-route-id=@Model.Id>To Item</a>
+    <a asp-action="Index">To List</a>
+</div>
