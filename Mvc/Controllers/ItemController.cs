@@ -16,11 +16,11 @@ namespace Mvc.Controllers
         // GET: ItemController
         public IActionResult Index(string? filter)
         {
-            if (filter == null)
+            if (String.IsNullOrEmpty(filter))
             {
                 return View(_context.Items.ToList().Take(50));
             }
-            return View(_context.Items.ToList().Take(10).Where(p => p.ItemName.Contains(filter)));
+            return View(_context.Items.Where(p => p.ItemName.Contains(filter)).ToList().Reverse<Item>().Take(10));
         }
 
         // GET: ItemController/Create
@@ -32,22 +32,24 @@ namespace Mvc.Controllers
         // POST: ItemController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create([Bind("Id","ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
         {
             try
             {
+                _context.Items.Add(item);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception exception)
             {
-                return View();
+                throw new Exception(exception.Message);
             }
         }
 
         // GET: ItemController/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
-            return View(await _context.Items.FindAsync(id));
+            return View(_context.Items.Find(id));
         }
 
         // POST: ItemController/Edit/5
@@ -61,7 +63,7 @@ namespace Mvc.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
@@ -73,17 +75,16 @@ namespace Mvc.Controllers
             return View(await _context.Items.FindAsync(id));
         }
 
-
         // GET: ItemController/Delete/5
-        //public IActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+        public IActionResult Delete(int id)
+        {
+            return View();
+        }
 
         // POST: ItemController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, Item item)
+        public IActionResult Delete(int id, [Bind("Id", "ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
         {
             try
             {

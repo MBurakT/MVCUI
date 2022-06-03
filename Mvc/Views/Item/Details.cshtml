@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <table class="table">
     <thead>
@@ -69,4 +69,4 @@
 </table>
 <a asp-action="Index">To List</a>&nbsp;
 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>&nbsp;
-<a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" method="post">Delete</a>

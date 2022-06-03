@@ -1,20 +1,13 @@
 ﻿@model Mvc.Models.Item
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" asp-route-id=@Model.Id method="post">
+<form asp-action="Create" method="post">
     <div class="form-horizontal">
-
-        <div class="form-group" hidden>
-            <label asp-for="Id" class="col-md-2 form-control"></label>
-            <div class="col-md-10">
-                <input asp-for="Id" class="form-control" value=@Model.Id />
-            </div>
-        </div>
         <div class="form-group">
             <label asp-for="ItemCode" class="col-md-2 form-control"></label>
             <div class="col-md-10">
@@ -82,12 +75,9 @@
         *@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
-
 <a asp-action="Index">To List</a>
-<a asp-action="Details" asp-route-id=@Model.Id>To Item</a>
-<a asp-action="Delete" asp-route-id="@Model.Id" method="post">Delete</a>
