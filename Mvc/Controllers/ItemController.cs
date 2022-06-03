@@ -13,15 +13,19 @@ namespace Mvc.Controllers
         }
 
         // GET: ItemController
-        public ActionResult Index()
+        public ActionResult Index(string? filter)
         {
-            return View(_context.Items.ToList());
+            if(filter == null)
+            {
+                return View(_context.Items.ToList().Take(30));
+            }
+            return View(_context.Items.ToList().Take(5).Where(p=>p.ItemName.Contains(filter)));
         }
 
         // GET: ItemController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            return View(await _context.Items.FindAsync(id));
         }
 
         // GET: ItemController/Create

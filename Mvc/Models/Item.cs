@@ -1,10 +1,13 @@
-﻿namespace Mvc.Models
+﻿using System.ComponentModel;
+
+namespace Mvc.Models
 {
     public class Item
     {
         public int Id { get; set; }
         public string? ItemCode { get; set; }
         public string? ItemName { get; set; }
+        [DisplayName("UnitPrice")]
         public double? UNITPRICE { get; set; }
         public string? Category1 { get; set; }
         public string? Category2 { get; set; }
