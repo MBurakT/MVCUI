@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mvc.Models;
 
 namespace Mvc.Data
 {
     public class EtradeContext : DbContext
     {
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public EtradeContext(DbContextOptions<EtradeContext> options): base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=ETRADE4;Integrated Security=True");
         }
+
+        public DbSet<Item> Items { get; set; }
+
     }
 }
