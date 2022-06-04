@@ -77,7 +77,12 @@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete">Delete</a>
+                    <form asp-action="Delete" method="post">
+                        <p>
+                            <input type="text" name="id" value="@item.Id" hidden/>
+                            <input type="submit" value="Delete" />
+                        </p>
+                    </form>
                 </td>
             </tr>
         }
