@@ -77,15 +77,15 @@ namespace Mvc.Controllers
         }
 
         // GET: ItemController/Delete/5
-        //public IActionResult Delete(int? id)
-        //{
-        //    return Ok();
-        //}
+        public IActionResult Delete(int? id)
+        {
+            return Ok();
+        }
 
         // POST: ItemController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int? id)
+        public IActionResult DeleteConfirmed(int? id)
         {
             try
             {
