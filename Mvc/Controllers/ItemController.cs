@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mvc.Data;
 using Mvc.Models;
+using System.Linq;
 
 namespace Mvc.Controllers
 {
@@ -20,7 +21,7 @@ namespace Mvc.Controllers
             {
                 return View(_context.Items.ToList().Take(50));
             }
-            return View(_context.Items.Where(p => p.ItemName.Contains(filter)).ToList().Reverse<Item>().Take(10));
+            return View(_context.Items.Where(p => p.ItemName.Contains(filter) && p.ItemName.Substring(0, 1).Equals("A")).OrderBy(p => p.ItemName).ToList().Take(10));
         }
 
         // GET: ItemController/Create
@@ -32,7 +33,7 @@ namespace Mvc.Controllers
         // POST: ItemController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id","ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
+        public IActionResult Create([Bind("Id", "ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
         {
             try
             {
@@ -40,7 +41,7 @@ namespace Mvc.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
@@ -76,19 +77,11 @@ namespace Mvc.Controllers
         }
 
         // GET: ItemController/Delete/5
-        public IActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ItemController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, [Bind("Id", "ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
         {
             try
             {
-                _context.Items.Remove(item);
+                _context.Remove(item);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -96,6 +89,22 @@ namespace Mvc.Controllers
             {
                 throw new Exception(exception.Message);
             }
+
         }
+
+        // POST: ItemController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Delete(int id, [Bind("Id", "ItemCode", "ItemName", "UNITPRICE", "Category1", "Category2", "Category3", "Category4", "Brand")] Item item)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
     }
 }
